@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hunt Github</title>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+
+    </head>
+    <body>
+        <input type="text" name="" id="userName" value="">
+        <button id="btn">Click Me!!</button>
+        <p></p>
+
+        <script>
+            $(document).ready(function() {
+
+                $("#btn").click(function(){
+                    // var el = document.getElementById('userName');
+                    var name = $('#userName').val();
+                    $.get(`https://api.github.com/users/${name}`, displayName)
+                });
+
+                function displayName(data){
+                    alert(data.name);
+                }
+            });
+        </script>
+
+    </body>
+</html>
