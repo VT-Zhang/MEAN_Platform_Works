@@ -18,15 +18,17 @@ app.get('/', function(req, res) {
 // })
 
 var server = app.listen(8000, function() {
- console.log("listening on port 8000");
+   console.log("listening on port 8000");
 });
-var io = require("socket.io").listen(server);
+
+var io = require('socket.io').listen(server);
+
 io.sockets.on("connection", function(socket){
     console.log("We are using sockets!!!");
     console.log(socket.id);
-})
 
-io.sockets.on("button_clicked", function (data){
-    console.log('Someone clicked a button!  Reason: ' + data.reason);
-    socket.emit('server_response', {response: "sockets are the best!"});
+    socket.on("button_clicked", function (data){
+        console.log('Someone clicked a button!  Reason: ' + data.reason);
+        socket.emit('server_response', {response: "sockets are the best!"});
+    })
 })
