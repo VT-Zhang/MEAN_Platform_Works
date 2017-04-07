@@ -32,9 +32,7 @@ app.get('/', function(req, res) {
 })
 app.get('/quotes', function(req, res){
     User.find({}).sort({createdAt: 'desc'}).exec(function(err, users){
-        if(err){
-            console.log(err);
-        }
+        if(err){console.log(err);}
         console.log(users);
         res.render('quotes', {users});
     })
