@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mongoose Dashboard</title>
+    </head>
+    <body>
+        <% if (typeof(errors) != "undefined"){ %>
+            <% for (var x in errors){ %>
+                <h3><%= errors[x].message %></h3>
+            <% } %>
+        <% } %>
+        <h1>Welcome to Mongoose Dashboard</h1>
+        <a href="/mongooses/new">Add New Mongoose</a>
+        <h1>These are our cute Mongooses</h1>
+        <hr />
+        <% if (animals) { %>
+            <% for (var x in animals) {%>
+                <p>Name: <%= animals[x].name %></p>
+                <p>Kind: <%= animals[x].kind %></p>
+                <p>Build: <%= animals[x].build %> | <a href="/mongooses/edit/<%= animals[x]._id %>">Edit</a> |
+                    <form action="/mongooses/destroy/<%= animals[x]._id %>" method="post">
+                        <input name="_method" type="hidden" value="delete" />
+                        <input type="submit" value="Delete" />
+                </form></p>
+                <hr />
+            <% } %>
+        <% } %>
+    </body>
+</html>
