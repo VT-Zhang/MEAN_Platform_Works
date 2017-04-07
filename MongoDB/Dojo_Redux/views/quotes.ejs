@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Quoting Dojo</title>
+    </head>
+    <body>
+        <h1>Here are the awesome quotes!</h1>
+        <a href="/">Go Back</a>
+        <% for (var i = 0; i < users.length; i++){%>
+        <p><u><%=users[i].name %></u> says: "<%=users[i].quote %>"  %></p>
+        <p><i>at <%=users[i].createdAt%></i></p>
+        <hr />
+        <% } %>
+    </body>
+</html>
