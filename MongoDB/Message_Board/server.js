@@ -3,16 +3,16 @@ var bodyParser = require("body-parser");
 var path = require("path");
 var app = express();
 
-app.use(bodyParser.unlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "./static")));
 app.set("views", path.join(__dirname, "./views"));
-app.set("view engine". "ejs");
+app.set("view engine", "ejs");
 
 app.listen(8000, function(){
     console.log("Server starts successfull! Listening to port: 8000!");
 })
 
-va mongoose = require("mongoose");
+var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/Message_Board");
 mongoose.Promise = global.Promise;
 
@@ -43,4 +43,43 @@ app.get("/", function(req, res){
             res.render("index", {messages});
         }
     })
+})
+
+app.post("/message/", function(req, res){
+    message = new Message({poster: req.body.name, message: req.body.message});
+    message.save(function(err){
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.redirect("/");
+        }
+    })
+})
+
+app.post("/message/:id/comment", function(req, res){
+    Message.findOne({_id: req.params.id}, function(err, message){
+        if(err){
+            console.log(err);
+        }
+        else{
+            comment = new Comment({commenter: req.body.name, comment: req.body.comment, _message: message._id});
+            comment.save(function(err){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    message.comments.push(comment._id);
+                    message.save(function(err){
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            res.redirect("/");
+                        }
+                    });
+                }
+            });
+        }
+    });
 })
