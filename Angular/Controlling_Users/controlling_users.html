@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Controlling Users</title>
+         <script src='bower_components/angular/angular.js'></script>
+         <script type='text/javascript'>
+            var myApp = angular.module("myApp", []);
+            myApp.controller("usersController",["$scope", function($scope){
+                $scope.users = [
+                    {first_name: "Nick",
+                     last_name: "Smith",
+                     favelang: "Ruby"
+                    },
+                    {first_name: "Mike",
+                     last_name: "Brady",
+                     favelang: "Python"
+                    },
+                    {first_name: "John",
+                     last_name: "Doe",
+                     favelang: "C++"
+                    }
+                ];
+
+                $scope.addUser = function(){
+                    $scope.users.push($scope.user);
+                }
+
+                $scope.deleteUser = function(index){
+                    $scope.users.splice(index, 1);
+                }
+            }]);
+         </script>
+    </head>
+    <body>
+        <div id="wrapper" ng-controller="usersController">
+            <h1>Controlling Users</h1>
+            <div id="upper">
+                <form ng-submit="addUser()">
+                    <p>First Name: <input type="text" ng-model="user.first_name" /></p>
+                    <p>Last Name: <input type="text" ng-model="user.last_name" /></p>
+                    <p>Favorite Language: <input type="text" ng-model="user.favelang" /></p>
+                    <input type="submit" value="Create Usere" />
+                </form>
+            </div>
+            <br />
+            <input type="text" placeholder="Filter" ng-model="userFilter" />
+            <br />
+            <div id="lower">
+                <table>
+                    <tr>
+                        <td>First Name |</td>
+                        <td>Last Name |</td>
+                        <td>Favorite Language |</td>
+                        <td>Actions</td>
+                    </tr>
+                    <tr ng-repeat="user in users | filter:userFilter track by $index">
+                        <th>{{user.first_name}}</th>
+                        <th>{{user.last_name}}</th>
+                        <th>{{user.favelang}}</th>
+                        <th><button ng-click="deleteUser($index)">Delete</button></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
