@@ -20,9 +20,6 @@
     </script>
     <script>
         var app = angular.module('app', []);
-        /*
-         this is our controller with $scope injected
-        */
         app.controller('foodsController', ['$scope', function($scope) {
             $scope.foods = [];
             $scope.addFood = function() {
