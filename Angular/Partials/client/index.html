@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <title>Partials and Custom Users</title>
+        <script src='angular/angular.js'></script>
+        <script src='angular-route/angular-route.js'></script>
+        <script>
+            var app = angular.module("app",["ngRoute"]);
+            app.config(function($routeProvider){
+                $routeProvider
+                .when("/user",{
+                    templateUrl:"partials/users.html"
+                })
+                .when("/list",{
+                    templateUrl:"partials/lists.html"
+                })
+                .otherwise({
+                    redirectTo:"/user"
+                });
+            })
+
+            app.factory("userFactory", [function(){
+                var factory = {};
+                var users = [
+                  {first_name: "Yukihiro", last_name: "Matsumoto", favelang: "Ruby"},
+                  {first_name: "Ryan", last_name: "Dahl", favelang: "Javascript"},
+                  {first_name: "Brendan", last_name: "Eich", favelang: "Javascript"}
+                ];
+
+                factory.index = function(callback){
+                    callback(users);
+                }
+
+                factory.create = function(user){
+                    users.push(user);
+                }
+
+                factory.delete = function(index){
+                    users.splice(index, 1);
+                }
+                return factory;
+            }])
+
+            app.controller("userController", ["$scope", "userFactory", function($scope, userFactory){
+                function setUsers(data){
+                    $scope.users = data;
+                    $scope.user = {};
+                }
+
+                $scope.users = [];
+
+                userFactory.index(setUsers);
+
+                $scope.create = function(){
+                    userFactory.create($scope.user);
+                    $scope.user = {};
+                }
+
+                $scope.delete = function($index){
+                    userFactory.delete($index);
+                }
+            }])
+
+            app.controller("listController", ["$scope", "userFactory", function($scope, userFactory){
+                function setUsers(data){
+                    $scope.users = data;
+                }
+
+                $scope.users = [];
+
+                userFactory.index(setUsers);
+            }])
+
+        </script>
+    </head>
+    <body>
+        <a href="#!/user">Customize Users</a>
+        <a href="#!/list">User List</a>
+        <div ng-view="">
+
+        </div>
+    </body>
+</html>

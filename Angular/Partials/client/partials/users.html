@@ -1,0 +1,24 @@
+<div ng-controller="userController">
+    <h1>You are viewing User Controller Partial</h1>
+    <form ng-submit="create()">
+        <p>First Name: <input type="text" ng-model="user.first_name" /></p>
+        <p>Last Name: <input type="text" ng-model="user.last_name" /></p>
+        <p>Favorite Language: <input type="text" ng-model="user.favelang" /></p>
+        <input type="submit" value="Create Usere" />
+    </form>
+
+    <table>
+        <tr>
+            <td>First Name |</td>
+            <td>Last Name |</td>
+            <td>Favorite Language |</td>
+            <td>Actions</td>
+        </tr>
+        <tr ng-repeat="user in users track by $index">
+            <th>{{user.first_name}}</th>
+            <th>{{user.last_name}}</th>
+            <th>{{user.favelang}}</th>
+            <th><button ng-click="delete($index)">Delete</button></th>
+        </tr>
+    </table>
+</div>

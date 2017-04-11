@@ -1,0 +1,20 @@
+{
+  "name": "partials",
+  "homepage": "https://github.com/VT-Zhang/Mean",
+  "authors": [
+    "VT-Zhang <jianz@vt.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.6.4"
+  }
+}
