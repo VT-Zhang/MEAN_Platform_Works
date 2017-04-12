@@ -7,8 +7,8 @@ module.exports = {
         if(err){
             console.log(err);
         }
+        res.json(friends);
     })
-    res.json(friends);
   },
   create: function(req,res){
     Friend.create(req.body, function(err, friends){
@@ -26,9 +26,7 @@ module.exports = {
             console.log(err);
         }
         else{
-            friend.first_name: req.body.first_name;
-            friend.last_name: req.body.last_name;
-            friend.dob: req.body.dob;
+            var friend = new Friend({first_name: req.body.first_name, last_name: req.body.last_name, dob: req.body.dob});
             friend.save(function(err, updatedFriend){
                 if(err){
                     console.log(err);

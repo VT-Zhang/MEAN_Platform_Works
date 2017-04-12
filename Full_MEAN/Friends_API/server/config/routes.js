@@ -1,4 +1,4 @@
-var friends = require("../controller/friends.js");
+var friends = require("../controllers/friends.js");
 
 module.exports = function(app){
     app.get("/", function(req, res){
