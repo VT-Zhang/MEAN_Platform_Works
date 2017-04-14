@@ -8,7 +8,6 @@ app.use( express.static( path.join( root, 'client' )));
 app.use( express.static( path.join( root, 'bower_components' )));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.set('view engine', 'ejs');
 
 process.env["root"] = __dirname;
 

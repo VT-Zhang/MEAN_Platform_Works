@@ -1,7 +1,7 @@
 
 
 app.controller("allController", ["$scope", "friendsFactory", "$location", function($scope, friendsFactory, $location){
-    $scope.friends = []
+    $scope.friends = {};
     var index = function(){
         friendsFactory.index(function(data){
             console.log(data);
