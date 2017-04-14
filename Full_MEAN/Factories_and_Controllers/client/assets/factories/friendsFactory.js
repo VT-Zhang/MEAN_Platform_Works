@@ -1,34 +1,41 @@
 app.factory("friendsFactory", ["$http", function($http){
-    var factory = {}
-    var friends = [];
+    var factory = {};
 
-    factory.index = function(){
+    factory.index = function(callback){
         $http.get("/friends").then(function(returned_data){
-            friends = returned_data.data;
-            callback(friends);
+            if(typeof(callback) == "function"){
+                friends = returned_data.data;
+                callback(friends);
+            }
         });
     }
 
     factory.show = function(id, callback){
         $http.get("/friends/" + id).then(function(returned_data){
-            friend = returned_data.data;
-            callback(friend);
-        })
-    }
-
-    factory.create = function(friend, callback){
-        $http.post("/friends", friend).then(function(returned_data){
-            console.log(returned_data);
-            friend = returned_data.data;
-            console.log(friend);
-            if (typeof(callback) == "function"){
+            if(typeof(callback) == "function"){
+                friend = returned_data.data;
                 callback(friend);
             }
         });
     }
 
-    factory.update = function(friend, callback){
-        $http.put("/friends/" + friend._id, {first_name: friend.first_name, last_name: friend.last_name, dob: friend.dob})
+    factory.create = function(newFriend, callback){
+        console.log(newFriend);
+        $http.post("/friends", newFriend)
+        .then(function(returned_data){
+            console.log(returned_data);
+            friend = returned_data.data;
+            if (typeof(callback) == "function"){
+                callback(friend);
+            }
+        })
+        .catch(function(err){
+            if(err){console.log(err);}
+        })
+    }
+
+    factory.update = function(id, updatedFriend, callback){
+        $http.put("/friends/" + id, updatedFriend)
         .then(function(returned_data){
             friends = returned_data.data;
             if(typeof(callback) == "function"){
@@ -39,25 +46,11 @@ app.factory("friendsFactory", ["$http", function($http){
 
     factory.delete = function(id, callback){
         $http.delete("/friends/" + id).then(function(returned_data){
-            friend = returned_data.data;
-            callback(friend);
+            if(typeof(callback) == "function"){
+                friend = returned_data.data;
+                callback(friend);
+            }
         })
     }
-
-    factory.getFriend = function(friendId, callback){
-        $http.get("/friends"+friendId).then(function(returned_data){
-            friend = returned_data.data;
-            callback(friend);
-        })
-    }
-
-    factory.getFriends = function(callback){
-        callback(friends);
-    }
-
-    factory.addFriend = function(friend){
-        friends.push(friend);
-    }
-
     return factory;
 }])

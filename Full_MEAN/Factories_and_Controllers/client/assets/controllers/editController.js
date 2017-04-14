@@ -1,19 +1,21 @@
 var app = angular.module("app");
 app.controller("editController",
-    ["$scope", "routeParams", "friendsFactory",
-    function($scope, $routeParams, friendsFactory){
+    ["$scope", "$routeParams", "friendsFactory", "$location",
+    function($scope, $routeParams, friendsFactory, $location){
+
     friend = {};
 
-    var findFriend = function(){
-        friendsFactory.getFriend($routeParams._id, function(factoryData){
-            friend = factoryData;
-        });
-    }
-    findFriend();
+    (function(id){
+        friendsFactory.show(id, function(data){
+            $scope.friend = data;
+        })
+    }($routeParams.id));
 
-    $scope.update = function(){
-        friendsFactory.update($scope.friend, function(returned_data){
-            console.log(returned_data);
-        });
+    $scope.update = function(id){
+        friendsFactory.update(id, $scope.updatedFriend);
+        friendsFactory.index(function(factoryData){
+            $scope.UpdatedFriends = factoryData;
+        })
+        $location.url("/");
     }
 }])

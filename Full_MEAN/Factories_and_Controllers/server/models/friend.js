@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var FriendSchema = new Schema({
-    first_name: {type: String, required:true},
+    first_name: {type: String, required: "First name required"},
     last_name: {type: String, required:true},
     dob: {type: Date, required:true}
 }, {timestamps:true});
-var Friend = mongoose.model("Friend", FriendSchema);
+mongoose.model("Friend", FriendSchema);

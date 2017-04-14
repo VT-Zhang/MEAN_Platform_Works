@@ -7,50 +7,48 @@ module.exports = {
         if(err){
             console.log(err);
         }
+        console.log(friends);
         res.json(friends);
-    })
+    });
   },
-  create: function(req,res){
-    Friend.create(req.body, function(err, friends){
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.json(friends);
-        }
-    })
+  create: function(req, res){
+        console.log("**********This is from req.body:********");
+        console.log(req.body);
+        Friend.create(req.body, function(err, friend){
+            if(err){console.log(err);}
+            res.json(friend);
+        });
   },
-  update: function(req,res){
+  update: function(req, res){
     Friend.findOne({_id:req.params.id}, function(err, friend){
-        if(err){
-            console.log(err);
-        }
-        else{
-            var friend = new Friend({first_name: req.body.first_name, last_name: req.body.last_name, dob: req.body.dob});
-            friend.save(function(err, updatedFriend){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.json(updatedFriend);
-                }
-            })
-        }
-    })
+        if(err){console.log(err);}
+        friend.first_name = req.body.first_name;
+        friend.last_name = req.body.last_name;
+        friend.dob = req.body.dob;
+        friend.save(function(err, updatedFriend){
+            if(err){console.log(err);}
+            res.json(updatedFriend);
+        });
+    });
   },
   delete: function(req,res){
     Friend.remove({_id: req.params.id}, function(err){
         if(err){
             console.log(err);
         }
-        else{
-            res.json({message: "Friend deleted!"})
+    });
+    Friend.find({},function(err, friends){
+        if(err){
+            console.log(err);
         }
-    })
+        console.log(friends);
+        res.json(friends);
+    });
   },
   show: function(req,res){
     Friend.findOne({_id: req.params.id}, function(err, friend){
+        if(err){console.log(err);}
         res.json(friend);
-    })
+    });
   }
 }

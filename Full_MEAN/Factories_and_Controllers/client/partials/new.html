@@ -1,7 +1,9 @@
-<h1>Create a New Friend</h1>
-<form ng-submit="create()">
-    <p>First Name: <input type="text" name="first_name" ng-model="friend.first_name" /></p>
-    <p>Last Name: <input type="text" name="last_name" ng-model="friend.last_name" /></p>
-    <p>Birthday: <input type="date" name="dob" ng-model="friend.dob" /></p>
-    <input type="submit" value="Create Friend" />
-</form>
+<div ng-controller="newController">
+    <h1>Create a New Friend</h1>
+    <form ng-submit="create()" method="post">
+        <p>First Name: <input type="text" ng-model="newfriend.first_name" /></p>
+        <p>Last Name: <input type="text" ng-model="newfriend.last_name" /></p>
+        <p>Birthday: <input type="date" ng-model="newfriend.dob" /></p>
+        <input type="submit" value="Create Friend" />
+    </form>
+</div>
