@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var bcrypt = require("bcryptjs");
+var bcrypt = require("bcrypt");
 
-Var UserSchema = new Schema({
+var UserSchema = new Schema({
     email: {
         type: String,
         required: [true, "Email can't be empty"],
@@ -21,7 +21,7 @@ Var UserSchema = new Schema({
     birthday: {
         type: Date,
         required: true
-    }
+    },
     password: {
         type: String,
         required: true,
@@ -40,17 +40,18 @@ Var UserSchema = new Schema({
         createdAt: "created_at",
         updatedAt: "updated_at"
     }
+   }
 );
 
-usersSchema.methods.generateHash = function(password){
+UserSchema.methods.generateHash = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 }
 
-usersSchema.methods.validPassword = function(password){
+UserSchema.methods.validPassword = function(password){
     return bcrypt.compareSync(password, this.password);
 }
 
-usersSchema.pre("save", function(done){
+UserSchema.pre("save", function(done){
     this.password = this.generateHash(this.password);
     done();
 });
