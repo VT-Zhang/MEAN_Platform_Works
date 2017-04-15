@@ -7,6 +7,7 @@ module.exports = {
         console.log(req.body);
         User.findOne({email: req.body.email}, function(err, user){
             if(err){
+                console.log(err);
                 res.json(err);
             }
             else if(!user){
@@ -18,9 +19,10 @@ module.exports = {
             else{
                 res.json({errors: "Invalid password!!"})
             }
-        })
+        });
     },
     register: function(req, res){
+        console.log(req.body);
         if(req.body.password != req.body.password_confirm){
             res.json({errors: "Passwords don't match!!"})
         }
@@ -30,12 +32,13 @@ module.exports = {
             }
             User.create(req.body, function(err, user){
                 if(err){
+                    console.log(err);
                     res.json(err);
                 }
                 else{
                     res.json(user);
                 }
-            })
+            });
         }
     }
 }

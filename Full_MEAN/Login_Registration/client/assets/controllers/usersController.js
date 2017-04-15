@@ -45,6 +45,7 @@ function($scope, usersFactory, $location, $cookies){
         angular.forEach(cookies, function(v, k){
             $cookies.remove(k);
         });
-        $location.url("");
+        $scope.messages.push("You have successfully logged out.");
+        $location.url("/");
     }
 }]);
