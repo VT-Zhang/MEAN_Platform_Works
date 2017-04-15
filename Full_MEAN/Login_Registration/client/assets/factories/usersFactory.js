@@ -6,7 +6,7 @@ app.factory("usersFactory", ["$http", function($http){
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
-            });
+            }
         });
     }
 
@@ -15,7 +15,7 @@ app.factory("usersFactory", ["$http", function($http){
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
-            });
+            }
         });
     }
 

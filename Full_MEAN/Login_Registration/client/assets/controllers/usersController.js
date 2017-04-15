@@ -25,8 +25,8 @@ function($scope, usersFactory, $location, $cookies){
         });
     }
 
-    $scope.login = fucntion(){
-        usersFactory.login($scope.user, funtion(data){
+    $scope.login = function(){
+        usersFactory.login($scope.user, function(data){
             if(data.errors){
                 $scope.message = data.errors;
                 $scope.flag = true;

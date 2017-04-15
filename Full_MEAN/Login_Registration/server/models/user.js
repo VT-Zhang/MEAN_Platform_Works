@@ -25,11 +25,11 @@ var UserSchema = new Schema({
     },
     birthday: {
         type: Date,
-        required: true
+        required: [true, "Birthday can't be emppty"],
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Password can't be empty"],
         minlength: 8,
         maxlength: 32,
         validate: {
