@@ -3,32 +3,17 @@
     <head>
         <meta charset="utf-8">
         <title>Login_Registration</title>
-        <link rel="stylesheet" href="assets/main.css">
-        <script src = 'angular/angular.js'></script>
-        <script src = 'angular-route/angular-route.js'></script>
-        <script src = 'angular-cookies/angular-cookies.js'></script>
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <script src="angular-cookies/angular-cookies.js"></script>
         <script src="assets/app.js" charset="utf-8"></script>
+        <script src="assets/controllers/usersController.js" charset="utf-8"></script>
+        <script src="assets/factories/usersFactory.js" charset="utf-8"></script>
+        <title>Login/Registration</title>
     </head>
-    <body ng-controller="loginController">
-        <form ng-model="registration" ng-submit="registration()">
-            {{errors.first_name.message}}
-            <input type="text" ng-model="registration.first_name" placeholder="First Name" />
-            {{errors.last_name.message}}
-            <input type="text" ng-model="registration.last_name" placeholder="Last Name" />
-            <input type="email"  ng-model = "registration.email" placeholder= "email">
-            {{errors.password.message}}
-            <input type="password"  ng-model = "registration.password" placeholder= "password">
-            <input type="password" ng-model = "registration.confirm_password" placeholder= "confirm password">
-            {{errors.birthday.message}}
-            <input type="date" ng-model = "registration.birthday">
-            <input type="submit" value = "register">
-        </form>
-        <br />
-        <form ng-model="userLogin" ng-submit="login()">
-            {{errors.login_res.message}}
-            <input type="email"  ng-model = "userLogin.email" placeholder= "email">
-            <input type="password"  ng-model = "userLogin.password" placeholder= "password">
-            <input type="submit" value = "login">
-        </form>
+    <body>
+        <h1>Login and Registration</h1>
+        <a href="#!/login">Login</a> | <a href="#!/register">Registration</a>
+        <div ng-view=""></div>
     </body>
 </html>

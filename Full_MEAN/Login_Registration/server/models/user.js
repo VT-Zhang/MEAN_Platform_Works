@@ -6,7 +6,12 @@ var UserSchema = new Schema({
     email: {
         type: String,
         required: [true, "Email can't be empty"],
-        unique: [true, "Email has used, choose another email"]
+        unique: [true, "Email has used, choose another email"],
+        validate: {
+            validator: function(value){
+                return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+            }, message: "Invalid email, please try again"
+        },
     },
     first_name: {
         type: String,
@@ -42,18 +47,5 @@ var UserSchema = new Schema({
     }
    }
 );
-
-UserSchema.methods.generateHash = function(password){
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-}
-
-UserSchema.methods.validPassword = function(password){
-    return bcrypt.compareSync(password, this.password);
-}
-
-UserSchema.pre("save", function(done){
-    this.password = this.generateHash(this.password);
-    done();
-});
 
 mongoose.model("User", UserSchema);
