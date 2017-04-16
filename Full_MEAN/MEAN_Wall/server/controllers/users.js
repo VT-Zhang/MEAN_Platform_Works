@@ -5,6 +5,7 @@ var Message = mongoose.model("Message");
 module.exports = {
 
     create: function(req, res){
+        console.log(req.body);
         User.findOne({username: req.body.username}, function(err, user){
             if(err){
                 res.json(err);

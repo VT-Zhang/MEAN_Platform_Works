@@ -1,1 +1,22 @@
-The Wall will be build here.
+<div ng-controller="mainController">
+    <h1>Full MEAN Wall</h1>
+    <h1>Welcome User!</h1>
+    <button type="button" ng-click="logout">Sign Out</button>
+    <hr />
+    <p>Post a message:</p>
+    <form ng-submit="createMessage">
+        <textarea row="5" cols="50" ng-model="message.content" placeholder="Enter your message here..."></textarea>
+        <input type="submit" value="Create New Message">
+    </form>
+    <hr />
+
+    <div ng-repeat="message in messages | orderBy: '-createdAt' track by $index">
+        <h2><u>{{message._user.username}}</u> says: {{message.content}} on {{message.createAt | date:"short"}}</h2>
+
+        <form ng-submit="createComment(message._id, $index)">
+            <textarea row="3" cols="30" ng-model="comment[$index].content" placeholder="Enter your comment here..."></textarea>
+            <input type="submit" value="Add Comment">
+        </form>
+    </div>
+
+</div>
