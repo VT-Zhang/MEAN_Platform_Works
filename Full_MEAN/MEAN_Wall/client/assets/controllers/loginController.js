@@ -1,4 +1,4 @@
-app.controller("usersController", ["$scope", "wallsFactory", "$location", "$cookies", function($scope, wallsFactory, $location, $cookies){
+app.controller("loginController", ["$scope", "wallsFactory", "$location", "$cookies", function($scope, wallsFactory, $location, $cookies){
     $scope.login = function(){
         wallsFactory.login($scope.user, function(data){
             if(data.errors){

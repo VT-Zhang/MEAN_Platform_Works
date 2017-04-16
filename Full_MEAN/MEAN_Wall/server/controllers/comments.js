@@ -24,6 +24,6 @@ module.exports = {
                     res.json({success: "Commend posted!"})
                 });
             });
-        }
+        });
     }
 }

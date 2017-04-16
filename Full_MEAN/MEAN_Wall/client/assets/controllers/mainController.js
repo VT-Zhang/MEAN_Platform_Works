@@ -1,8 +1,8 @@
 app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cookies", function($scope, wallsFactory, $location, $cookies){
     var index = function(){
-        if(!cookies.get("user_id"){
+        if(!cookies.get("user_id")){
             $location.url("/");
-        });
+        };
         wallsFactory.index(function(data){
             $scope.messages = data.messages;
         });
@@ -22,7 +22,7 @@ app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cooki
 
     $scope.newComment = {};
     $scope.createComment = function(message_id, i){
-        wallsFactory.createComment($scope.newComment[i], $cookies.get("user_id", message_id, function(data){
+        wallsFactory.createComment($scope.newComment[i], $cookies.get("user_id"), message_id, function(data){
             if(data.errors){
                 console.log(data.errors);
             }

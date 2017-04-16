@@ -7,13 +7,13 @@ module.exports = function(app){
     app.post("/users", function(req, res){
         users.create(req, res);
     });
-    app.get("/messages", fucntion(req, res){
+    app.get("/messages", function(req, res){
         messages.index(req, res);
     });
     app.post("/:id/messages", function(req, res){
         messages.create(req, res);
     });
-    app.post("/:id/messages/:message_id/comment", fucntion(req, res){
+    app.post("/:id/messages/:message_id/comment", function(req, res){
         comments.create(req, res)
     });
 }
