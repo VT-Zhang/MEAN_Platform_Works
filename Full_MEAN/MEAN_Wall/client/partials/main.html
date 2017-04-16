@@ -1,0 +1,12 @@
+<div ng-controller="userController">
+    <h3 ng-show="flag" ng-repeat="error in errors">{{error}}</h3>
+    <form ng-submit="create()">
+        <p>
+            Enter a user name to continute:
+        </p>
+        <p>
+            <input type="text" ng-model="user.username" />
+            <button type="submit">Enter</button>
+        </p>
+    </form>
+</div>

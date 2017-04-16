@@ -10,10 +10,10 @@ module.exports = function(app){
     app.get("/messages", fucntion(req, res){
         messages.index(req, res);
     });
-    app.post("/messages", function(req, res){
+    app.post("/:id/messages", function(req, res){
         messages.create(req, res);
     });
-    app.post("/messages/:id/comment", fucntion(req, res){
+    app.post("/:id/messages/:message_id/comment", fucntion(req, res){
         comments.create(req, res)
     });
 }
