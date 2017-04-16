@@ -1,4 +1,4 @@
-app.factory("wallsFactory", ["http", function($http){
+app.factory("wallsFactory", ["$http", function($http){
     var factory = {};
 
     factory.login = function(user, callback){
