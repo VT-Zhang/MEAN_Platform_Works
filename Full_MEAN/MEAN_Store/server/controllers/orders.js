@@ -5,17 +5,25 @@ var Product = mongoose.model("Product");
 
 module.exports = {
     index: function(req, res){
-        Product.find({}, function(err, products){
+        Order.find({})
+        .populate("_customer")
+        .populate("products")
+        .exec(function(err, orders){
             if(err){
                 console.log(err);
             }
+            Customer.find({}, function(err, customers){
+                if(err){
+                    console.log(err);
+                }
+                Product.find({}, function(err, products){
+                    if(err){
+                        console.log(err);
+                    }
+                    res.json({orders:orders, customers:customers, products:products});
+                });
+            });
         });
-        Customer.find({}, function(err, customers){
-            if(err){
-                console.log(err);
-            }
-        });
-        res.json({products: products, customers: customers});
     },
     create: function(req, res){
         Order.create({_customer: req.params.customer_id, products: req.params.product_id, quantity: req.body.quantity}, function(err, order){
