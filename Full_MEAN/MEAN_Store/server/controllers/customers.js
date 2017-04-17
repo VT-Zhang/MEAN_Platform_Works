@@ -31,7 +31,7 @@ module.exports = {
     destroy: function(req, res){
         Customer.remove({_id: req.params.id}, function(err, customer){
             if(err){
-                console.log(err);
+                res.json(err);;
             }
             res.json(customer);
         });

@@ -7,7 +7,7 @@
             <th>Description</th>
             <th>Inventory</th>
         </tr>
-        <tr ng-repeat="product in products | orderBy: '-createdAt' track by $index">
+        <tr ng-repeat="product in products | orderBy: '-createdAt'">
             <th>{{product.pname}}</th>
             <th>{{product.description}}</th>
             <th>{{product.inventory}}</th>
@@ -17,14 +17,14 @@
     <hr />
 
     <h2><u>Recent Orders:</u></h2>
-    <div ng-repeat="order in orders | orderBy: '-createdAt' track by $index">
+    <div ng-repeat="order in orders | orderBy: '-createdAt'">
         <p><u>{{order._customer}}</u> purchased {{order.quantity}} {{order.products.pname}} (<i>{{order.createdAt | date:"short"}}</i>)</p>
     </div>
 
     <hr />
 
     <h2><u>New Customers:</u></h2>
-    <div ng-repeat="customer in customers | orderBy: '-createdAt' track by $index">
+    <div ng-repeat="customer in customers | orderBy: '-createdAt'">
         <p>{{customer.cname}} joined the store (<i>{{customer.createdAt | date:"short"}}</i>)</p>
     </div>
 </div>
