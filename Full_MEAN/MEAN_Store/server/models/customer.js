@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CustomerSchema = new Schema({
-    name: {type: String, required:"Customer name must be provided."},
+    cname: {type: String, required:"Customer name must be provided."},
     orders: [{type: Schema.Types.ObjectId, ref:"Order"}],
     products: [{type: Schema.Types.ObjectId, ref:"Product"}]
 }, {timestamps: true});
