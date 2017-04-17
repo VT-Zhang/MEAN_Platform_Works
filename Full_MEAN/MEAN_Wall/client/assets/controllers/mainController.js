@@ -38,6 +38,7 @@ app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cooki
 
     $scope.logout = function(){
         $cookies.remove("user_id");
+        $cookies.remove("user_name");
         $location.url("/");
     }
 }]);
