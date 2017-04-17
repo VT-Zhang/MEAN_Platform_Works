@@ -7,7 +7,7 @@ module.exports = {
             if(err){
                 console.log(err);
             }
-            res.json(customers);
+            res.json({customers: customers});
         });
     },
     create: function(req, res){
@@ -29,10 +29,11 @@ module.exports = {
         });
     },
     destroy: function(req, res){
-        Customer.remove({_id: req.params.id}, function(err){
+        Customer.remove({_id: req.params.id}, function(err, customer){
             if(err){
                 console.log(err);
             }
+            res.json(customer);
         });
     }
 }

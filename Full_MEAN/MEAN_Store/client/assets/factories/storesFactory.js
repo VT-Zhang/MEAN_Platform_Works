@@ -2,7 +2,7 @@ app.factory("storesFactory", ["$http", function($http){
     var factory = {};
 
 //*********for dashboardController functions***********
-    factory.dasboardIndex = function(callback){
+    factory.dashboardIndex = function(callback){
         $http.get("/")
         .then(function(returned_data){
             if(typeof(callback)=="function"){
@@ -83,6 +83,7 @@ app.factory("storesFactory", ["$http", function($http){
         console.log(customer);
         $http.post("/customers", customer)
         .then(function(returned_data){
+            console.log(returned_data.data);
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }
@@ -93,7 +94,7 @@ app.factory("storesFactory", ["$http", function($http){
     }
     factory.deleteCustomer = function(id, callback){
         console.log(id);
-        $http.post("/customers"+id)
+        $http.delete("/customers/"+id)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
