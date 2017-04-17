@@ -14,6 +14,7 @@ app.controller("productsController", ["$scope", "storesFactory", "$location", "$
             console.log(data);
             if(data.errors){
                 $scope.errors = data.errors;
+                console.log($scope.errors);
             }
             index();
             $scope.newProduct = {};

@@ -13,7 +13,7 @@ module.exports = {
     create: function(req, res){
         Customer.findOne({name: req.body.cname}, function(err, customer){
             if(err){
-                res.json({errors: err});
+                res.json({errors: err.errors});
             }
             if(!customer){
                 Customer.create(req.body, function(err, customer){

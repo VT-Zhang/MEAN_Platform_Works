@@ -35,9 +35,8 @@ module.exports = {
 
     create: function(req, res){
         Product.create(req.body, function(err, product){
-            console.log(req.body);
             if(err){
-                console.log(err);
+                res.json({errors: err.errors});
             }
             res.json(product);
         });
