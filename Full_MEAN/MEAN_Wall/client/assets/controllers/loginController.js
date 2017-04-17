@@ -7,6 +7,7 @@ app.controller("loginController", ["$scope", "wallsFactory", "$location", "$cook
             }
             else {
                 $cookies.put("user_id", data._id);
+                $cookies.put("user_name", data.username);
                 $location.url("/wall");
             }
         })

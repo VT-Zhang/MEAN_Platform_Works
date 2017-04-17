@@ -1,18 +1,19 @@
 <div ng-controller="mainController">
-    <h1>Full MEAN Wall</h1>
-    <h1>Welcome User!</h1>
-    <button type="button" ng-click="logout">Sign Out</button>
+    <h2>Full MEAN Wall Page</h2>
+    <h2>{{user_name}}, you have sucessfully signed in! <button type="button" ng-click="logout()">Sign Out</button></h2>
     <hr />
     <p>Post a message:</p>
-    <form ng-submit="createMessage">
+    <form ng-submit="createMessage()">
         <textarea row="5" cols="50" ng-model="message.content" placeholder="Enter your message here..."></textarea>
         <input type="submit" value="Create New Message">
     </form>
     <hr />
 
     <div ng-repeat="message in messages | orderBy: '-createdAt' track by $index">
-        <h2><u>{{message._user.username}}</u> says: {{message.content}} on {{message.createAt | date:"short"}}</h2>
-
+        <h2><u>{{message._user.username}}</u> says: "{{message.content}}" on <i>{{message.createdAt | date:"short"}}</i></h2>
+        <div ng-repeat="comment in message.comments">
+            <p><u>{{comment.name}}</u> replies: "{{comment.content}}" on <i>{{comment.createdAt | date:"short"}}</i></p>
+        </div>
         <form ng-submit="createComment(message._id, $index)">
             <textarea row="3" cols="30" ng-model="comment[$index].content" placeholder="Enter your comment here..."></textarea>
             <input type="submit" value="Add Comment">

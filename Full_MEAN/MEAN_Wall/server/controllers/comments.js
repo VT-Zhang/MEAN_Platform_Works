@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Comments = mongoose.model("Comment");
+var Comment = mongoose.model("Comment");
 var Message = mongoose.model("Message");
 var User = mongoose.model("User");
 
@@ -13,7 +13,11 @@ module.exports = {
                 if(err){
                     res.json(err);
                 }
-                Comments.create({_user: user._id, _message: message._id, name: user.username, content: req.body.content}, function(err, comment){
+                Comment.create({_user: req.params.id, _message: req.params.message_id, name: user.username, content: req.body.content}, function(err, comment){
+                    console.log("*******This is req.params.id*******");
+                    console.log(req.params.id);
+                    console.log("*******This is req.params.message_id*******");
+                    console.log(req.params.message_id);
                     if(err){
                         res.json(err);
                     }

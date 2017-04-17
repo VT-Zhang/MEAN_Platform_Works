@@ -21,11 +21,13 @@ module.exports = {
     },
     create: function(req, res){
         User.findOne({_id:req.params.id}, function(err, user){
-            Message.create({_user:user.id, content: req.body.content}, function(err, message){
+            console.log(req.params.id);
+            Message.create({_user:req.params.id, content: req.body.content}, function(err, message){
+                console.log(req.body);
                 if(err){
                     res.json(err);
                 }
-                user.message.push(message);
+                user.messages.push(message);
                 user.save();
                 res.json(message);
             });

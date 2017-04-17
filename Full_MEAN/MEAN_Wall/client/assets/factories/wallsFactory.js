@@ -26,7 +26,8 @@ app.factory("wallsFactory", ["$http", function($http){
     }
 
     factory.createMessage = function(message, id, callback){
-        $http.post("/"+ id + "/messages")
+        console.log(message);
+        $http.post("/"+ id + "/messages", message)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
@@ -38,7 +39,7 @@ app.factory("wallsFactory", ["$http", function($http){
     }
 
     factory.createComment = function(comment, user_id, message_id, callback){
-        $http.post("/"+user_id+"/messages/"+message_id+"/comment", comment)
+        $http.post("/"+user_id+"/messages/"+message_id+"/comments", comment)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);

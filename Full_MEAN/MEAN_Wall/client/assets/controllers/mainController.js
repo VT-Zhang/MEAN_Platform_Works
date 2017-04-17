@@ -1,4 +1,5 @@
 app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cookies", function($scope, wallsFactory, $location, $cookies){
+    $scope.user_name = $cookies.get("user_name");
     var index = function(){
         if(!$cookies.get("user_id")){
             $location.url("/");
@@ -11,6 +12,7 @@ app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cooki
     $scope.message = {};
 
     $scope.createMessage = function(){
+        console.log($scope.message);
         wallsFactory.createMessage($scope.message, $cookies.get("user_id"), function(data){
             if(data.errors){
                 console.log(data.errors);
@@ -26,7 +28,10 @@ app.controller("mainController", ["$scope", "wallsFactory", "$location", "$cooki
             if(data.errors){
                 console.log(data.errors);
             }
-            index();
+            wallsFactory.index(function(data){
+                $scope.messages = data.messages;
+            });
+            $scope.message = {};
             $scope.comment[index] = {};
         });
     }

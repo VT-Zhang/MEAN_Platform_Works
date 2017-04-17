@@ -13,7 +13,7 @@ module.exports = function(app){
     app.post("/:id/messages", function(req, res){
         messages.create(req, res);
     });
-    app.post("/:id/messages/:message_id/comment", function(req, res){
+    app.post("/:id/messages/:message_id/comments", function(req, res){
         comments.create(req, res)
     });
 }
