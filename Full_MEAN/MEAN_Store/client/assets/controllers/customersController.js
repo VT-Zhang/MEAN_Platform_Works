@@ -13,7 +13,7 @@ app.controller("customersController", ["$scope", "storesFactory", "$location", "
         storesFactory.createCustomer($scope.newCustomer, function(data){
             console.log(data);
             if(data.errors){
-                console.log(data.errors);
+                $scope.errors = data.errors;
             }
             index();
             $scope.newCustomer = {};

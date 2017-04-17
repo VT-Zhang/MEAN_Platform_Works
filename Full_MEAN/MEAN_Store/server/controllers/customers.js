@@ -13,18 +13,15 @@ module.exports = {
     create: function(req, res){
         Customer.findOne({name: req.body.cname}, function(err, customer){
             if(err){
-                res.json(err);
+                res.json({errors: err});
             }
             if(!customer){
                 Customer.create(req.body, function(err, customer){
                     if(err){
-                        res.json(err);
+                        res.json({errors: "Cusomter is already in the system! Use another name..."});
                     }
                     res.json(customer);
                 });
-            }
-            else {
-                res.json({errors: "Cusomter is already in the system!"});
             }
         });
     },

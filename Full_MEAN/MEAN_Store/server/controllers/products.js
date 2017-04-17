@@ -19,12 +19,13 @@ module.exports = {
             if(err){
                 console.log(err);
             }
+            res.json({customers: customers});
         });
-        res.json({products: products, orders: orders, customers: customers});
     },
 
     index: function(req, res){
         Product.find({}, function(err, products){
+            console.log(products);
             if(err){
                 console.log(err);
             }
@@ -34,6 +35,7 @@ module.exports = {
 
     create: function(req, res){
         Product.create(req.body, function(err, product){
+            console.log(req.body);
             if(err){
                 console.log(err);
             }

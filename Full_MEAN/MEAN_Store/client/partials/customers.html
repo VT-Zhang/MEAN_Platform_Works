@@ -5,8 +5,9 @@
         <p>Customer Name: <input type="text" ng-model="newCustomer.cname" /></p>
         <input type="submit" value="Add" />
     </form>
+    <p style="color:red">{{errors}}</p>
     <hr />
-    <p><input type="text" placeholder="search name" ng-model="filter_name"</p>
+    <p><input type="text" placeholder="search name" ng-model="filter_name" /></p>
     <table>
         <tr>
             <th>Customer Name</th>

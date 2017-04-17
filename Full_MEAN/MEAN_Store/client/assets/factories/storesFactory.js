@@ -20,6 +20,7 @@ app.factory("storesFactory", ["$http", function($http){
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
+                console.log(returned_data.data);
             }
         })
         .catch(function(err){
