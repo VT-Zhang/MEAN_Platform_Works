@@ -8,7 +8,9 @@ module.exports = function(app){
         products.main(req, res);
     });
 
-
+    app.get("/products", function(req, res){
+        products.index(req, res);
+    });
     app.post("/products", function(req, res){
         products.create(req, res);
     });
