@@ -20,6 +20,8 @@ function($scope, usersFactory, $location, $cookies){
             else {
                 $scope.flag = false;
                 $cookies.put("user_id", data._id);
+                $cookies.put("user_name", data.username);
+                $scope.username = $cookies.get("user_name");
                 $location.url("/success");
             }
         });
@@ -35,10 +37,14 @@ function($scope, usersFactory, $location, $cookies){
             else {
                 $scope.flag = false;
                 $cookies.put("user_id", data._id);
+                $cookies.put("user_name", data.username);
+                $scope.username = $cookies.get("user_name");
                 $location.url("/success");
             }
         });
     }
+
+
 
     $scope.logout = function(){
         var cookies = $cookies.getAll();
