@@ -9,19 +9,19 @@ module.exports = {
             if(err){
                 console.log(err);
             }
-        }
+        });
         Order.find({}, function(err, orders){
             if(err){
                 console.log(err);
             }
-        }
+        });
         Customer.find({}, function(err, customers){
             if(err){
                 console.log(err);
             }
-        }
+        });
         res.json({products: products, orders: orders, customers: customers});
-    }
+    },
 
     index: function(req, res){
         Product.find({}, function(err, products){
@@ -30,7 +30,7 @@ module.exports = {
             }
             res.json(products);
         });
-    }
+    },
 
     create: function(req, res){
         Product.create(req.body, function(err, product){

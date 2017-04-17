@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var ProductSchema = new Schema({
     pname: {type: String, required:"Product name must be provided!"},
-    description: {type: String, required:"Product description can't be empty", minlength: 3}
+    description: {type: String, required:"Product description can't be empty", minlength: 3},
     inventory: {type: Number, required: true},
     _customer: [{type: Schema.Types.ObjectId, ref:"Customer"}],
     _order: [{type: Schema.Types.ObjectId, ref:"Order"}]

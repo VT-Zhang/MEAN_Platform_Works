@@ -9,14 +9,14 @@ module.exports = {
             if(err){
                 console.log(err);
             }
-        }
+        });
         Customer.find({}, function(err, customers){
             if(err){
                 console.log(err);
             }
-        }
+        });
         res.json({products: products, customers: customers});
-    }
+    },
     create: function(req, res){
         Order.create({_customer: req.params.customer_id, products: req.params.product_id, quantity: req.body.quantity}, function(err, order){
             if(err){
@@ -26,7 +26,7 @@ module.exports = {
                 if(err){
                     console.log(err);
                 }
-                Product.findOne({_id: req.params.product_id}, function(err), product){
+                Product.findOne({_id: req.params.product_id}, function(err, product){
                     if(err){
                         console.log(err);
                     }
@@ -37,7 +37,7 @@ module.exports = {
                         res.json({errors: "Your inventory is not enough to fulfill this order!"});
                     }
                     product.save;
-                }
+                });
                 customer.products.push(product);
                 customer.save;
             });
@@ -45,5 +45,5 @@ module.exports = {
             order.save;
         });
         res.json(order);
-    }
+    },
 }
