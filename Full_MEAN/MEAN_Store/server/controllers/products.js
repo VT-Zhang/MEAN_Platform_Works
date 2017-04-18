@@ -5,21 +5,28 @@ var Product = mongoose.model("Product");
 
 module.exports = {
     main: function(req, res){
-        Product.find({}, function(err, products){
+        Order.find({})
+        .populate("_customer")
+        .populate("_product")
+        .exec(function(err, orders){
             if(err){
-                console.log(err);
+                res.json({errors: err.errors});
             }
-        });
-        Order.find({}, function(err, orders){
-            if(err){
-                console.log(err);
-            }
-        });
-        Customer.find({}, function(err, customers){
-            if(err){
-                console.log(err);
-            }
-            res.json({customers: customers});
+            Customer.find({})
+            .populate("orders")
+            .exec(function(err, customers){
+                if(err){
+                    res.json({errors: err.errors});
+                }
+                Product.find({})
+                .populate("orders")
+                .exec(function(err, products){
+                    if(err){
+                        res.json({errors: err.errors});
+                    }
+                    res.json({orders: orders, customers: customers, products: products});
+                });
+            });
         });
     },
 

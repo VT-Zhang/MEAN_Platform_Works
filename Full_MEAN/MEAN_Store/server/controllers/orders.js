@@ -7,7 +7,7 @@ module.exports = {
     index: function(req, res){
         Order.find({})
         .populate("_customer")
-        .populate("products")
+        .populate("_product")
         .exec(function(err, orders){
             if(err){
                 console.log(err);
@@ -26,31 +26,37 @@ module.exports = {
         });
     },
     create: function(req, res){
-        Order.create({_customer: req.params.customer_id, products: req.params.product_id, quantity: req.body.quantity}, function(err, order){
+        Order.create({quantity: req.body.quantity, _customer: req.body._customer, _product: req.body._product}, function(err, order){
             if(err){
                 console.log(err);
             }
-            Customer.findOne({_id: req.params.customer_id}, function(err, customer){
+            Product.findOne({_id: req.body._product}, function(err, product){
                 if(err){
                     console.log(err);
                 }
-                Product.findOne({_id: req.params.product_id}, function(err, product){
-                    if(err){
-                        console.log(err);
-                    }
-                    if (product.inventory >= req.body.quantity){
-                        product.inventory -= req.body.quantity;
-                        product.save;
-                    }
-                    else {
-                        res.json({errors: "Your inventory is not enough to fulfill this order!"});
-                    }
-                });
-                customer.save;
+                if (product.inventory >= req.body.quantity){
+                    product.inventory -= req.body.quantity;
+                    product.save(function(err){
+                        if(err){
+                            res.json({errors: err.errors});
+                        }
+                    });
+                }
+                else {
+                    Order.remove({_id: order._id}, function(err){
+                        if(err){
+                            res.json({errors: err.errors});
+                        }
+                    });
+                    res.json({errors: "Your inventory is not enough to fulfill this order!"});
+                }
             });
-            order.products.push(product);
-            order.save;
+            order.save(function(err){
+                if(err){
+                    res.json({errors: err.errors});
+                }
+            });
+            res.json(order);
         });
-        res.json(order);
     },
 }

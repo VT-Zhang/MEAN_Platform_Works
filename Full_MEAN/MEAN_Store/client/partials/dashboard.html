@@ -1,6 +1,7 @@
+
 <h1>Dashboard Page</h1>
 <div ng-controller="dashboardController">
-    <h2><u>Our Current Inventory:</u></h2>
+    <h3><u>Our Current Inventory:</u></h3>
     <table>
         <tr>
             <th>Product Name</th>
@@ -16,15 +17,15 @@
 
     <hr />
 
-    <h2><u>Recent Orders:</u></h2>
-    <div ng-repeat="order in orders | orderBy: '-createdAt'">
-        <p><u>{{order._customer}}</u> purchased {{order.quantity}} {{order.products.pname}} (<i>{{order.createdAt | date:"short"}}</i>)</p>
+    <h3><u>Recent Orders:</u></h3>
+    <div ng-repeat="order in orders | orderBy: '-createdAt' | limitTo: 3">
+        <p><u>{{order._customer.cname}}</u> purchased {{order.quantity}} {{order._product.pname}} ... (<i>{{order.createdAt | date:"short"}}</i>)</p>
     </div>
 
     <hr />
 
-    <h2><u>New Customers:</u></h2>
-    <div ng-repeat="customer in customers | orderBy: '-createdAt'">
-        <p>{{customer.cname}} joined the store (<i>{{customer.createdAt | date:"short"}}</i>)</p>
+    <h3><u>New Customers:</u></h3>
+    <div ng-repeat="customer in customers | orderBy: '-createdAt' | limitTo: 3">
+        <p><u>{{customer.cname}}</u> joined the store...(<i>{{customer.createdAt | date:"short"}}</i>)</p>
     </div>
 </div>

@@ -4,7 +4,7 @@ var orders = require("./../controllers/orders.js");
 var products = require("./../controllers/products.js");
 
 module.exports = function(app){
-    app.get("/", function(req, res){
+    app.get("/dashboard", function(req, res){
         products.main(req, res);
     });
 
@@ -30,7 +30,7 @@ module.exports = function(app){
     app.get("/orders", function(req, res){
         orders.index(req, res);
     });
-    app.post("/orders/:customer_id/:product_id", function(req, res){
+    app.post("/orders", function(req, res){
         orders.create(req, res);
     });
 

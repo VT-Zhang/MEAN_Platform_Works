@@ -3,7 +3,7 @@ app.factory("storesFactory", ["$http", function($http){
 
 //*********for dashboardController functions***********
     factory.dashboardIndex = function(callback){
-        $http.get("/")
+        $http.get("/dashboard")
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
@@ -52,11 +52,8 @@ app.factory("storesFactory", ["$http", function($http){
             console.log(err);
         });
     }
-    factory.createOrder = function(quantity, customer_id, product_id, callback){
-        console.log(quantity);
-        console.log(customer_id);
-        console.log(product_id);
-        $http.post("/orders/"+customer_id+"/"+product_id, quantity)
+    factory.createOrder = function(newOrder, callback){
+        $http.post("/orders", newOrder)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
