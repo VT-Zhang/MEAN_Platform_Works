@@ -1,0 +1,22 @@
+{
+  "name": "Discussion_Board",
+  "homepage": "https://github.com/VT-Zhang/Mean",
+  "authors": [
+    "VT-Zhang <jianz@vt.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-cookies": "^1.6.4"
+  }
+}
