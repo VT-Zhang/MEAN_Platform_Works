@@ -20,5 +20,14 @@ module.exports = {
                 return res.json(user);
             }
         });
+    },
+
+    show: function(req, res){
+        User.findOne({_id: req.params.id}, function(err, user){
+            if(err){
+                return res.json({errors: err.errors});
+            }
+            return res.json(user);
+        });
     }
 }

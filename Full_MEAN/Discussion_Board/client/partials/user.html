@@ -1,0 +1,9 @@
+<div ng-controller="userController">
+    <h2>This is the user page..</h2>
+    <a href="#!/dashboard">Dashboard</a> | <a href="" ng-click="logout()">Logout</a>
+    <h3>User Name: <u>{{user.name}}</u></h3>
+    <h3>Posted:</h3>
+    <h4 style="color: green">{{user.topics.length}} topics</h4>
+    <h4 style="color: green">{{user.posts.length}} posts</h4>
+    <h4 style="color: green">{{user.comments.length}} comments</h4>
+</div>

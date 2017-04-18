@@ -11,8 +11,8 @@
         </tr>
         <tr ng-repeat="topic in topics | filter:filter_topics | orderBy: '-createdAt' track by $index">
             <td>{{topic.category}}</td>
-            <td>{{topic.title}}</td>
-            <td>{{topic._user.name}}</td>
+            <td><a href="#!/topics/{{topic._id}}">{{topic.title}}</a></td>
+            <td><a href="#!/users/{{topic._user._id}}">{{topic._user.name}}</a></td>
             <td>{{topic.posts.length}}</td>
         </tr>
     </table>

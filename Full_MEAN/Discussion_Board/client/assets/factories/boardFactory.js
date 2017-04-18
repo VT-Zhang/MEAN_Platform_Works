@@ -38,6 +38,21 @@ app.factory("boardFactory", ["$http", function($http){
             console.log(err);
         });
     }
+
+//*********userController functions************
+    factory.showUser = function(id, callback){
+        $http.get("/users/"+id)
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+
 //Return the factory object.
 
     return factory;

@@ -8,6 +8,9 @@ module.exports = function(app){
     app.post("/users", function(req, res){
         users.create(req, res);
     });
+    app.get("/users/:id", function(req, res){
+        users.show(req, res);
+    });
 
     app.get("/dashboard", function(req, res){
         topics.index(req, res);
