@@ -4,6 +4,7 @@ var User = mongoose.model("User");
 module.exports = {
     create: function(req, res){
         User.findOne({name: req.body.name}, function(err, user){
+            console.log(req.body.name);
             if(err){
                 return res.json({errors: err.errors});
             }
