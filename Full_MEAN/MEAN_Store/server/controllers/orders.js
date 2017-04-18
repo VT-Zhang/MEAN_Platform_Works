@@ -40,13 +40,12 @@ module.exports = {
                     }
                     if (product.inventory >= req.body.quantity){
                         product.inventory -= req.body.quantity;
+                        product.save;
                     }
                     else {
                         res.json({errors: "Your inventory is not enough to fulfill this order!"});
                     }
-                    product.save;
                 });
-                customer.products.push(product);
                 customer.save;
             });
             order.products.push(product);
