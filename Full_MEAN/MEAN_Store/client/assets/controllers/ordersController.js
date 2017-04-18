@@ -18,6 +18,7 @@ app.controller("ordersController", ["$scope", "storesFactory", "$location", "$co
             console.log(data);
             if(data.errors){
                 $scope.errors = data.errors;
+                console.log($scope.errors);
             }
             index();
             $scope.newOrder = {};
