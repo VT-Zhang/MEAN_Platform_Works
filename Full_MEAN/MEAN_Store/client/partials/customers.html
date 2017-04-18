@@ -6,6 +6,9 @@
         <input type="submit" value="Add" />
     </form>
     <p style="color:red">{{errors}}</p>
+    <div ng-repeat="error in errors track by $index">
+        <p style="color:red">{{error.message}}</p>
+    </div>
     <hr />
     <p><input type="text" placeholder="search name" ng-model="filter_name" /></p>
     <table>
