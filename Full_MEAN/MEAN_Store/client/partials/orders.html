@@ -28,9 +28,7 @@
         </p>
         <input type="submit" value="Place Order" />
     </form>
-    <div ng-repeat="error in errors track by $index">
-        <p style="color:red">{{error.message}}</p>
-    </div>
+    <p style="color:red">{{errors}}</p>
     <hr />
     <h3><u>Current Orders</u></h3>
     <p><input type="text" placeholder="search order" ng-model="filter_order" /></p>
