@@ -64,6 +64,7 @@ app.controller("mainController", ["$scope", "boardFactory", "$routeParams", "$lo
                     $scope.errors = data.errors;
                 }
             });
+            index();
         }
         else{
             $scope.errors = [{message: "Comment content must be provided."}]
