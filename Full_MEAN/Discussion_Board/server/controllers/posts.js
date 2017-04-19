@@ -7,29 +7,21 @@ var Comment = mongoose.model("Comment");
 module.exports = {
 
     index: function(req, res){
-        Topic.findOne({_id: req.params.id})
-        .populate("posts")
-        .populate("comments")
+        Post.find({_topic: req.params.id})
         .populate("_user")
-        .exec(function(err, topic){
+        .populate("_topic")
+        .populate("comments")
+        .exec(function(err, posts){
             if(err){
                 return res.json({errors: err.errors});
             }
-            Post.find({_topic: req.params.id}, function(err, posts){
+            Topic.findOne({_id: req.params.id})
+            .populate("_user")
+            .exec(function(err, topic){
                 if(err){
                     return res.json({errors: err.errors});
                 }
-                Comment.find({_topic: req.params.id}, function(err, comments){
-                    if(err){
-                        return res.json({errors: err.errors});
-                    }
-                    User.find({}, function(err, users){
-                        if(err){
-                            return res.json({errors: err.errors});
-                        }
-                        return res.json({topic: topic, posts: posts, comments: comments, users: users});
-                    });
-                });
+                return res.json({posts: posts, topic: topic});
             });
         });
     },
@@ -39,7 +31,15 @@ module.exports = {
             if(err){
                 return res.json({errors: err.errors});
             }
-            return res.json(post);
+            User.findOne({_id: req.body._user}, function(err, user){
+                if(err){
+                    return res.json({errors: err.errors});
+                }
+                user.posts.push(post);
+                user.save();
+                return res.json({post: post, user: user});
+            })
+
         });
     }
 

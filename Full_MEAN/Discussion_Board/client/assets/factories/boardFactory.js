@@ -66,7 +66,7 @@ app.factory("boardFactory", ["$http", function($http){
     }
 
     factory.createPost = function(newPost, callback){
-        $http.post("/posts")
+        $http.post("/posts", newPost)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);

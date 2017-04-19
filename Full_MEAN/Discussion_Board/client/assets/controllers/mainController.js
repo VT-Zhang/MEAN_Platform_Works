@@ -20,7 +20,7 @@ app.controller("mainController", ["$scope", "boardFactory", "$routeParams", "$lo
         $scope.newPost._user = $cookies.get("user_id");
         $scope.newPost._topic = $scope.topic._id;
         console.log($scope.newPost);
-        boardFactory.createMessage($scope.newPost, function(data){
+        boardFactory.createPost($scope.newPost, function(data){
             if(data.errors){
                 console.log(data.errors);
                 $scope.errors = data.errors;
