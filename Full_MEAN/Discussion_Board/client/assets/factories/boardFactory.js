@@ -103,6 +103,19 @@ app.factory("boardFactory", ["$http", function($http){
         });
     }
 
+    factory.createComment = function(comment, callback){
+        $http.post("/comments", comment)
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
 //Return the factory object.
 
     return factory;

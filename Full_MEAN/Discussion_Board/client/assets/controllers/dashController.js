@@ -24,8 +24,17 @@ app.controller("dashController", ["$scope", "boardFactory", "$location", "$cooki
                 console.log(data.errors);
                 $scope.errors = data.errors;
             }
+            else{
+                $scope.errors = [];
+            }
             index();
             $scope.newTopic = {};
         });
+    }
+
+    $scope.logout = function(){
+        $cookies.remove("user_id");
+        $cookies.remove("user_name");
+        $location.url("/");
     }
 }]);

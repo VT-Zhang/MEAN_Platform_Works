@@ -1,5 +1,5 @@
 <div ng-controller="dashController">
-    <h2>Welcome, {{user_name}}!</h2>
+    <h2>Welcome, {{user_name}}! | <a href="" ng-click="logout()">Logout</a></h2>
     <p><input type="text" placeholder="search topics" ng-model="filter_topics" /></p>
     <hr />
     <table>
@@ -32,7 +32,7 @@
             <option value="C++">C++</option>
         </select></p>
         <p>Topic: <input type="text" ng-model="newTopic.title" /></p>
-        <p>Description: <textarea cols="30" row="5" ng-model="newTopic.description"></textarea></p>
+        <p>Description: <textarea cols="30" row="5" ng-model="newTopic.description" placeholder="enter description"></textarea></p>
         <input type="submit" value="Add new topic" />
     </form>
 </div>

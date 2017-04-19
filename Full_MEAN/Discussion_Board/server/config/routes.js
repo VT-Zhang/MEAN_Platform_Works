@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var users = require("./../controllers/users.js");
 var topics = require("./../controllers/topics.js");
 var posts = require("./../controllers/posts.js");
-// var comments = require("./../controllers/comments.js");
+var comments = require("./../controllers/comments.js");
 
 module.exports = function(app){
     app.post("/users", function(req, res){
@@ -30,5 +30,9 @@ module.exports = function(app){
     });
     app.post("/posts/:id/dislikes", function(req, res){
         posts.dislike(req, res);
+    });
+
+    app.post("/comments", function(req, res){
+        comments.create(req, res);
     });
 }

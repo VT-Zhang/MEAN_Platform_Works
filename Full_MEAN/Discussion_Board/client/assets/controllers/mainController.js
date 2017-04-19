@@ -7,9 +7,9 @@ app.controller("mainController", ["$scope", "boardFactory", "$routeParams", "$lo
             $location.url("/");
         };
         boardFactory.mainIndex($routeParams.id, function(data){
+            console.log(data);
             $scope.topic = data.topic;
             $scope.posts = data.posts;
-            $scope.comments = data.comments;
         });
     }
     index();
@@ -51,19 +51,28 @@ app.controller("mainController", ["$scope", "boardFactory", "$routeParams", "$lo
         });
     }
 
-    // $scope.comment = {};
-    // $scope.createComment = function(message_id, index){
-    //     wallsFactory.createComment($scope.comment[index], $cookies.get("user_id"), message_id, function(data){
-    //         if(data.errors){
-    //             console.log(data.errors);
-    //         }
-    //         wallsFactory.index(function(data){
-    //             $scope.messages = data.messages;
-    //         });
-    //         $scope.message = {};
-    //         $scope.comment[index] = {};
-    //     });
-    // }
+    $scope.comment = {};
+    $scope.createComment = function(post_id, id){
+        if($scope.comment[id]){
+            $scope.comment[id].username = $cookies.get("user_name");
+            $scope.comment[id]._user = $cookies.get("user_id");
+            $scope.comment[id]._topic = $scope.topic._id;
+            $scope.comment[id]._post = post_id;
+            boardFactory.createComment($scope.comment[id], function(data){
+                if(data.errors){
+                    console.log(data.errors);
+                    $scope.errors = data.errors;
+                }
+            });
+        }
+        else{
+            $scope.errors = [{message: "Comment content must be provided."}]
+        }
+
+        $scope.newPost = {};
+        $scope.comment[id] = {};
+        index();
+    }
 
     $scope.logout = function(){
         $cookies.remove("user_id");
