@@ -77,6 +77,32 @@ app.factory("boardFactory", ["$http", function($http){
         });
     }
 
+    factory.likePost = function(id, callback){
+        console.log(id);
+        $http.post("/posts/"+id+"/likes")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+                console.log(returned_data.data.likes)
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+    factory.dislikePost = function(id, callback){
+        $http.post("/posts/"+id+"/dislikes")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
 //Return the factory object.
 
     return factory;

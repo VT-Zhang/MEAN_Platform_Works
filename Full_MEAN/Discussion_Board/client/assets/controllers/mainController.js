@@ -30,6 +30,27 @@ app.controller("mainController", ["$scope", "boardFactory", "$routeParams", "$lo
         });
     }
 
+    $scope.like = function(id){
+        console.log(id);
+        boardFactory.likePost(id, function(data){
+            if(data.errors){
+                console.log(data.errors);
+                $scope.errors = data.errors;
+            }
+            index();
+        });
+    }
+
+    $scope.dislike = function(id){
+        boardFactory.dislikePost(id, function(data){
+            if(data.errors){
+                console.log(data.errors);
+                $scope.errors = data.errors;
+            }
+            index();
+        });
+    }
+
     // $scope.comment = {};
     // $scope.createComment = function(message_id, index){
     //     wallsFactory.createComment($scope.comment[index], $cookies.get("user_id"), message_id, function(data){

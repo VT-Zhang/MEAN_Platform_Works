@@ -41,6 +41,37 @@ module.exports = {
             })
 
         });
-    }
+    },
+
+    like: function(req, res){
+        Post.findOne({_id: req.params.id}, function(err, post){
+            if(err){
+                return res.json({errors: err.errors});
+            }
+            post.likes += 1;
+            post.save(function(err){
+                if(err){
+                    return res.json({errors: err.errors});
+                }
+                return res.json(post);
+            });
+        });
+    },
+
+
+    dislike: function(req, res){
+        Post.findOne({_id: req.params.id}, function(err, post){
+            if(err){
+                return res.json({errors: err.errors});
+            }
+            post.dislikes += 1;
+            post.save(function(err, post){
+                if(err){
+                    return res.json({errors: err.errors});
+                }
+                return res.json(post);
+            });
+        });
+    },
 
 }

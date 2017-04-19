@@ -25,4 +25,10 @@ module.exports = function(app){
     app.post("/posts", function(req, res){
         posts.create(req, res);
     });
+    app.post("/posts/:id/likes", function(req, res){
+        posts.like(req, res);
+    });
+    app.post("/posts/:id/dislikes", function(req, res){
+        posts.dislike(req, res);
+    });
 }
