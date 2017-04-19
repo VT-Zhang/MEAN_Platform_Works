@@ -52,6 +52,30 @@ app.factory("boardFactory", ["$http", function($http){
         });
     }
 
+//*********mainController functions************
+    factory.mainIndex = function(id, callback){
+        $http.get("/topics/"+id)
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+    factory.createPost = function(newPost, callback){
+        $http.post("/posts")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
 
 //Return the factory object.
 

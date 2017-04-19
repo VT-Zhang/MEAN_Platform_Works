@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var users = require("./../controllers/users.js");
 var topics = require("./../controllers/topics.js");
-// var posts = require("./../controllers/posts.js");
+var posts = require("./../controllers/posts.js");
 // var comments = require("./../controllers/comments.js");
 
 module.exports = function(app){
@@ -17,5 +17,12 @@ module.exports = function(app){
     });
     app.post("/topics", function(req, res){
         topics.create(req, res);
+    });
+
+    app.get("/topics/:id", function(req, res){
+        posts.index(req, res);
+    });
+    app.post("/posts", function(req, res){
+        posts.create(req, res);
     });
 }
