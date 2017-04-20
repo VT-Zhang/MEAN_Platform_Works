@@ -21,12 +21,9 @@
     <h2>Before I die I want to:</h2>
     <div ng-repeat="list in current_user.lists | orderBy: '-createdAt' track by $index">
         <p>
-            <% if ({{list.checked}} == true){ %>
-                <input type="checkbox" ng-click="check(list._id)" checked/>
-            <% } %>
-            <% else if ({{list.checked}} == false){ %>
-                <input type="checkbox" ng-click="check(list._id)" />
-            <% } %>
+
+            <input type="checkbox" ng-click="check(list._id)" checked ng-show="{{list.checked}}"/>
+            <input type="checkbox" ng-click="check(list._id)" ng-show="!{{list.checked}}"/>
             {{list.tagname}} | {{list.title}} - {{list.description}} - {{list.createdAt | date:"short"}}
         </p>
     </div>
