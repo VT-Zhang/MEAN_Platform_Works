@@ -17,7 +17,8 @@ var ListSchema = new Schema({
         default: false,
     },
     _user: {type: Schema.Types.ObjectId, ref: "User"},
-    taguser: {type: Schema.Types.ObjectId, ref: "User"},
+    _taguser: {type: Schema.Types.ObjectId, ref: "User"},
+    tagname: {type:String},
 }, {timestamps: true});
 
 mongoose.model("List", ListSchema);

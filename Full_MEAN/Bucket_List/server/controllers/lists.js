@@ -8,11 +8,12 @@ module.exports = {
             if(err){
                 return res.json({errors: err.errors});
             }
-            List.create(req.body, function(err, list){
+            List.create({_user: req.body._user, title: req.body.title, description: req.body.description, _taguser: req.body._taguser}, function(err, list){
                 if(err){
                     return res.json({errors: err.errors});
                 }
-                User.findOne({_id: req.body.taguser}, function(err, taguser){
+                User.findOne({_id: req.body._taguser}, function(err, taguser){
+                    console.log(taguser);
                     if(err){
                         return res.json({errors: err.errors});
                     }
@@ -24,6 +25,12 @@ module.exports = {
                     });
                     taguser.lists.push(list);
                     taguser.save(function(err){
+                        if(err){
+                            return res.json({errors: err.errors});
+                        }
+                    });
+                    list.tagname = taguser.name;
+                    list.save(function(err){
                         if(err){
                             return res.json({errors: err.errors});
                         }

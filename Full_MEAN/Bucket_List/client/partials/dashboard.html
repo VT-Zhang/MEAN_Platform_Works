@@ -6,7 +6,7 @@
         <p>
             <input type="text" placeholder="Title" ng-model="newList.title" />
             <input type="text" placeholder="Description" ng-model="newList.description" />
-            <select ng-model="newList.taguser">
+            <select ng-model="newList._taguser">
                 <option ng-repeat="user in users" value="{{user._id}}">
                     {{user.name}}
                 </option>
@@ -21,7 +21,7 @@
     <h2>Before I die I want to:</h2>
     <div ng-repeat="list in current_user.lists | orderBy: '-createdAt' track by $index">
         <p>
-            {{list.taguser.name}} | {{list.title}} - {{list.description}} - {{list.createdAt | date:"short"}}
+            {{list.tagname}} | {{list.title}} - {{list.description}} - {{list.createdAt | date:"short"}}
         </p>
     </div>
 </div>
