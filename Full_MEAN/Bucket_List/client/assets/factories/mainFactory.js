@@ -40,6 +40,20 @@ app.factory("mainFactory", ["$http", function($http){
         });
     }
 
+    factory.updateList = function(id, callback){
+        console.log(id);
+        $http.post("/lists/"+id)
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
 //Return the factory object.
 
     return factory;

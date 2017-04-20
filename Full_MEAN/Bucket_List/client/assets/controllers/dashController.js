@@ -30,6 +30,20 @@ app.controller("dashController", ["$scope", "mainFactory", "$location", "$cookie
         });
     }
 
+    $scope.check = function(id){
+        mainFactory.updateList(id, function(data){
+            if(data.errors){
+                console.log(data.errors);
+                $scope.errors = data.errors;
+            }
+            else{
+                $scope.errors = [];
+            }
+            index();
+            $scope.newList = {};
+        })
+    }
+
     $scope.logout = function(){
         $cookies.remove("user_id");
         $cookies.remove("user_name");

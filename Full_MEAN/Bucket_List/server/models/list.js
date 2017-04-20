@@ -2,6 +2,9 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ListSchema = new Schema({
+    _user: {type: Schema.Types.ObjectId, ref: "User"},
+    _taguser: {type: Schema.Types.ObjectId, ref: "User"},
+    tagname: {type:String},
     title: {
         type: String,
         required: "List's title must be provided.",
@@ -16,9 +19,6 @@ var ListSchema = new Schema({
         type: Boolean,
         default: false,
     },
-    _user: {type: Schema.Types.ObjectId, ref: "User"},
-    _taguser: {type: Schema.Types.ObjectId, ref: "User"},
-    tagname: {type:String},
 }, {timestamps: true});
 
 mongoose.model("List", ListSchema);

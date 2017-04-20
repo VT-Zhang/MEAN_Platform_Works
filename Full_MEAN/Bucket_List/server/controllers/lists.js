@@ -39,5 +39,25 @@ module.exports = {
                 });
             });
         });
+    },
+
+    update: function(req, res){
+        List.findOne({_id: req.params.id}, function(err, list){
+            if(err){
+                return res.json({errors: err.errors});
+            }
+            if (list.checked == false){
+                list.checked = true;
+            }
+            else if (list.checked == true){
+                list.checked = false;
+            }
+            list.save(function(err){
+                if(err){
+                    return res.json({errors: err.errors});
+                }
+            });
+            return res.json(list);
+        });
     }
 }

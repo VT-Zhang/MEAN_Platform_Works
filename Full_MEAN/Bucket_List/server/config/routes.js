@@ -20,5 +20,8 @@ module.exports = function(app){
         lists.create(req, res);
     });
 
+    app.post("/lists/:id", function(req, res){
+        lists.update(req, res);
+    });
 
 }
