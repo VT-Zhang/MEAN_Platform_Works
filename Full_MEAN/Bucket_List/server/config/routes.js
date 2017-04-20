@@ -8,6 +8,14 @@ module.exports = function(app){
         users.create(req, res);
     });
 
+    app.get("/dashboard/:id", function(req, res){
+        users.index(req, res);
+    });
+
+    app.get("/users/:id", function(req, res){
+        users.show(req, res);
+    });
+
     app.post("/lists", function(req, res){
         lists.create(req, res);
     });

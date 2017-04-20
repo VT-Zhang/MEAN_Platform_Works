@@ -1,0 +1,27 @@
+<div ng-controller="dashController">
+    <h2>Welcome, {{user_name}}!</h2>
+    <a href="#!/dashboard">Home</a> | <a href="" ng-click="logout()">Logout</a>
+    <hr />
+    <form ng-submit="create()">
+        <p>
+            <input type="text" placeholder="Title" ng-model="newList.title" />
+            <input type="text" placeholder="Description" ng-model="newList.description" />
+            <select ng-model="newList.taguser">
+                <option ng-repeat="user in users" value="{{user._id}}">
+                    {{user.name}}
+                </option>
+            </select>
+            <input type="submit" value="add" />
+        </p>
+    </form>
+    <div ng-repeat="error in errors">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+    <hr />
+    <h2>Before I die I want to:</h2>
+    <div ng-repeat="list in current_user.lists | orderBy: '-createdAt' track by $index">
+        <p>
+            {{list.taguser.name}} | {{list.title}} - {{list.description}} - {{list.createdAt | date:"short"}}
+        </p>
+    </div>
+</div>

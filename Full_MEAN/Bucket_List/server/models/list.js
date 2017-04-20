@@ -16,7 +16,8 @@ var ListSchema = new Schema({
         type: Boolean,
         default: false,
     },
-    users: [{type: Schema.Types.ObjectId, ref: "User"}],
+    _user: {type: Schema.Types.ObjectId, ref: "User"},
+    taguser: {type: Schema.Types.ObjectId, ref: "User"},
 }, {timestamps: true});
 
 mongoose.model("List", ListSchema);
