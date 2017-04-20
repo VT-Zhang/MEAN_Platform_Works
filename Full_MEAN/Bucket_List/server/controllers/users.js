@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
+var List = mongoose.model("List");
 
 module.exports = {
     index: function(req, res){
@@ -45,7 +46,27 @@ module.exports = {
             if(err){
                 return res.json({errors: err.errors});
             }
-            return res.json(user);
+            List.find({checked: true, _user: req.params.id}, function(err, main_dones){
+                if(err){
+                    return res.json({errors: err.errors});
+                }
+                List.find({checked: false, _user: req.params.id}, function(err, main_pendings){
+                    if(err){
+                        return res.json({errors: err.errors});
+                    }
+                    List.find({checked: true, _taguser: req.params.id}, function(err, tag_dones){
+                        if(err){
+                            return res.json({errors: err.errors});
+                        }
+                        List.find({checked: false, _taguser: req.params.id}, function(err, tag_pendings){
+                            if(err){
+                                return res.json({errors: err.errors});
+                            }
+                            return res.json({user:user, main_dones:main_dones, main_pendings:main_pendings, tag_dones:tag_dones, tag_pendings:tag_pendings});
+                        });
+                    });
+                });
+            });
         });
     }
 }

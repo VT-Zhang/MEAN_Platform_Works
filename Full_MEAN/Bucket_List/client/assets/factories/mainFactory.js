@@ -13,6 +13,20 @@ app.factory("mainFactory", ["$http", function($http){
         });
     }
 
+//*********userController functions************
+    factory.userIndex = function(id, callback){
+        $http.get("/users/"+id)
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
 //*********dashController functions************
     factory.dashIndex = function(id, callback){
         $http.get("/dashboard/"+id)
@@ -53,6 +67,7 @@ app.factory("mainFactory", ["$http", function($http){
             console.log(err);
         });
     }
+
 
 //Return the factory object.
 
