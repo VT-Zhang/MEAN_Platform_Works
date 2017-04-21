@@ -16,4 +16,9 @@ app.controller("userController", ["$scope", "mainFactory", "$routeParams", "$loc
     }
     index();
 
+    $scope.logout = function(){
+        $cookies.remove("user_id");
+        $cookies.remove("user_name");
+        $location.url("/");
+    }
 }]);
