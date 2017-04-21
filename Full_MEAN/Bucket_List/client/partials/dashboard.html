@@ -8,12 +8,8 @@
             <input type="text" placeholder="Title" ng-model="newList.title" />
             <input type="text" placeholder="Description" ng-model="newList.description" />
             <select ng-model="newList._taguser">
-                <option value="" disabled selected>
-                    select a user
-                </option>
-                <option ng-repeat="user in users" value="{{user._id}}">
-                    {{user.name}}
-                </option>
+                <option value="" disabled selected>select a user</option>
+                <option ng-repeat="user in users" value="{{user._id}}">{{user.name}}</option>
             </select>
             <input type="submit" value="Add to list" />
         </p>

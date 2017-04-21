@@ -4,19 +4,22 @@ var List = mongoose.model("List");
 
 module.exports = {
     index: function(req, res){
-        User.find({}, function(err, users){
-            if(err){
-                return res.json({errors: err.errors});
-            }
-            User.findOne({_id: req.params.id})
-            .populate("lists")
-            .exec(function(err, user){
+        User.find({})
+            .where("_id")
+            .ne(req.params.id)
+            .exec(function(err, users){
                 if(err){
                     return res.json({errors: err.errors});
                 }
-                return res.json({users: users, current_user: user});
+                User.findOne({_id: req.params.id})
+                .populate("lists")
+                .exec(function(err, user){
+                    if(err){
+                        return res.json({errors: err.errors});
+                    }
+                    return res.json({users: users, current_user: user});
+                });
             });
-        });
     },
 
     create: function(req, res){
