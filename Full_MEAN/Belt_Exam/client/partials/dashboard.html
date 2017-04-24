@@ -1,0 +1,34 @@
+<div ng-controller="dashController">
+    <h2>Welcome, {{user_name}}!</h2>
+    <a href="" ng-click="logout()">Logout</a>
+    <hr />
+    <h2>What's your bucket list?</h2>
+    <form ng-submit="create()">
+        <p>
+            <input type="text" placeholder="Title" ng-model="newList.title" />
+            <input type="text" placeholder="Description" ng-model="newList.description" />
+            <select ng-model="newList._taguser">
+                <option value="" disabled selected>select a user</option>
+                <option ng-repeat="user in users" value="{{user._id}}">{{user.name}}</option>
+            </select>
+            <input type="submit" value="Add to list" />
+        </p>
+    </form>
+    <div ng-repeat="error in errors">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+    <hr />
+    <h2>Before I die I want to:</h2>
+    <div ng-repeat="list in current_user.lists | orderBy: '-createdAt'">
+        <p>
+            <input type="checkbox" ng-click="check(list._id)" checked ng-show="{{list.checked}}"/>
+            <input type="checkbox" ng-click="check(list._id)" ng-show="!{{list.checked}}"/>
+            {{list.tagname}} | {{list.title}} - {{list.description}} - {{list.createdAt | date:"short"}}
+        </p>
+    </div>
+    <hr />
+    <h2>List of other users (click to see profile)</h2>
+        <div ng-repeat="user in users | orderBy: 'name'">
+            <h4><a href="#!/users/{{user._id}}">{{user.name}}</a></h4>
+        </div>
+</div>

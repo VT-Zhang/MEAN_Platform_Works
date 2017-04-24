@@ -1,0 +1,34 @@
+<div ng-controller="userController">
+    <a href="#!/dashboard/{{user_id}}">Home</a> | <a href="" ng-click="logout()">Logout</a>
+    <h3>{{user.name}}'s Bucket List</h3>
+    <h4>Done</h4>
+    <div ng-repeat="done in main_dones | orderBy: '-createdAt'">
+        <p>
+            <input type="checkbox" checked disabled ng-show="{{done.checked}}"/>
+            <input type="checkbox" disabled ng-show="!{{done.checked}}"/>
+            {{done.tagname}} | {{done.title}} - {{done.description}} - {{done.createdAt | date:"short"}}
+        </p>
+    </div>
+    <div ng-repeat="done in tag_dones | orderBy: '-createdAt'">
+        <p>
+            <input type="checkbox" checked disabled ng-show="{{done.checked}}"/>
+            <input type="checkbox" disabled ng-show="!{{done.checked}}"/>
+            {{done.tagname}} | {{done.title}} - {{done.description}} - {{done.createdAt | date:"short"}}
+        </p>
+    </div>
+    <h4>Pending</h4>
+    <div ng-repeat="pending in main_pendings | orderBy: '-createdAt'">
+        <p>
+            <input type="checkbox" checked disabled ng-show="{{pending.checked}}"/>
+            <input type="checkbox" disabled ng-show="!{{pending.checked}}"/>
+            {{pending.tagname}} | {{pending.title}} - {{pending.description}} - {{pending.createdAt | date:"short"}}
+        </p>
+    </div>
+    <div ng-repeat="pending in tag_pendings | orderBy: '-createdAt'">
+        <p>
+            <input type="checkbox" checked disabled ng-show="{{pending.checked}}"/>
+            <input type="checkbox" disabled ng-show="!{{pending.checked}}"/>
+            {{pending.tagname}} | {{pending.title}} - {{pending.description}} - {{pending.createdAt | date:"short"}}
+        </p>
+    </div>
+</div>
